@@ -1,12 +1,11 @@
 <!-- event-list.component.html -->
- <div>
-    <h1> Test </h1>
+<div class="event-list-container">
+   <h1 class="title">Upcoming Events</h1>
+   <div *ngFor="let event of events" class="event-card">
+     <h2 class="event-title">{{ event.title }}</h2>
+     <p class="event-description">{{ event.description }}</p>
+     <p class="event-date">Date: {{ event.date | date }}</p>
+     <p class="event-location">Location: {{ event.location }}</p>
+   </div>
  </div>
-<div *ngFor="let event of events" class="event">
-    <h1> Test </h1>
-    <h2>{{ event.title }}</h2>
-    <p>{{ event.description }}</p>
-    <p>Date: {{ event.date | date }}</p>
-    <p>Location: {{ event.location }}</p>
-  </div>
-  
+ 
