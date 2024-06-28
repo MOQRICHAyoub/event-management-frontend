@@ -11,13 +11,73 @@ import Swal from 'sweetalert2';
 })
 export class EventListComponent implements OnInit {
   events: Event[] = [];
+  filteredEvents: Event[] = [];
+  locations: string[] = [];
+  filters = {
+    name: '',
+    startDate: '',
+    endDate: '',
+    locationSearch: '',
+    selectedLocations: new Set<string>()
+  };
 
   constructor(private eventService: EventService, private registrationService: RegistrationService) { }
 
   ngOnInit(): void {
     this.eventService.getEvents().subscribe(events => {
       this.events = events;
+      this.filteredEvents = events;
+      this.locations = Array.from(new Set(events.map(event => event.location)));
     });
+  }
+
+  applyFilters(): void {
+    this.filteredEvents = this.events.filter(event => {
+      const eventDate = new Date(event.date);
+      const startDate = this.filters.startDate ? new Date(this.filters.startDate) : null;
+      const endDate = this.filters.endDate ? new Date(this.filters.endDate) : null;
+
+      return (!this.filters.name || event.title.toLowerCase().includes(this.filters.name.toLowerCase())) &&
+             (!startDate || eventDate >= startDate) &&
+             (!endDate || eventDate <= endDate) &&
+             (this.filters.selectedLocations.size === 0 || this.filters.selectedLocations.has(event.location));
+    });
+  }
+
+  resetFilters(): void {
+    this.filters = {
+      name: '',
+      startDate: '',
+      endDate: '',
+      locationSearch: '',
+      selectedLocations: new Set<string>()
+    };
+    this.filteredEvents = this.events;
+  }
+
+  toggleLocation(location: string): void {
+    if (this.filters.selectedLocations.has(location)) {
+      this.filters.selectedLocations.delete(location);
+    } else {
+      this.filters.selectedLocations.add(location);
+    }
+    this.applyFilters();
+  }
+
+  selectAllLocations(): void {
+    this.filters.selectedLocations = new Set(this.locations);
+    this.applyFilters();
+  }
+
+  deselectAllLocations(): void {
+    this.filters.selectedLocations.clear();
+    this.applyFilters();
+  }
+
+  filterLocations(): string[] {
+    return this.locations.filter(location =>
+      location.toLowerCase().includes(this.filters.locationSearch.toLowerCase())
+    );
   }
 
   showParticipants(eventId: number | undefined): void {
