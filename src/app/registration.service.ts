@@ -18,4 +18,8 @@ export class RegistrationService {
     const registration = { username: userName, eventid: eventId };
     return this.http.post<any>(this.apiUrl, registration);
   }
+
+  isUserRegistered(eventId: number, userName: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/event/${eventId}/user/${userName}`);
+  }
 }

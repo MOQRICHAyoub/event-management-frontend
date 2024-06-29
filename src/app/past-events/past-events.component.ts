@@ -157,7 +157,7 @@ export class PastEventsComponent implements OnInit {
                       Swal.fire('Success', 'Your feedback has been submitted', 'success');
                     });
                   } else {
-                    Swal.fire('Error', 'Please enter a valid rating and comments', 'error');
+                    Swal.fire('Error', 'Please enter a valid rating (between 1 and 5) and comments', 'error');
                   }
                 }
               });

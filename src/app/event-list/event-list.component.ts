@@ -108,8 +108,16 @@ export class EventListComponent implements OnInit {
       }).then(result => {
         if (result.isConfirmed && result.value) {
           const userName = result.value;
-          this.registrationService.register(userName, eventId).subscribe(() => {
-            Swal.fire('Succès', 'Vous êtes inscrit à l\'événement', 'success');
+          this.registrationService.isUserRegistered(eventId, userName).subscribe(isRegistered => {
+            if (isRegistered) {
+              Swal.fire('Erreur', 'Un participant avec ce nom est déjà inscrit.', 'error').then(() => {
+                this.registerForEvent(eventId);
+              });
+            } else {
+              this.registrationService.register(userName, eventId).subscribe(() => {
+                Swal.fire('Succès', 'Vous êtes inscrit à l\'événement', 'success');
+              });
+            }
           });
         }
       });
