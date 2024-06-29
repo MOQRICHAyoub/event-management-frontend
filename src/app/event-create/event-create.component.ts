@@ -1,4 +1,3 @@
-// event-create.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from '../event.service';
@@ -18,6 +17,7 @@ export class EventCreateComponent implements OnInit {
     location: ''
   };
   minDate: string = '';
+  isDateValid: boolean = true;
 
   constructor(private eventService: EventService, private router: Router) { 
     this.setMinDate();
@@ -32,6 +32,10 @@ export class EventCreateComponent implements OnInit {
     this.minDate = `${today.getFullYear()}-${month}-${day}`;
   }
 
+  checkDateValidity(): void {
+    this.isDateValid = new Date(this.event.date).getTime() > new Date(this.minDate).getTime();
+  }
+
   onSubmit(): void {
     if (this.event.title.length < 1 || this.event.title.length > 50) {
       Swal.fire('Error', 'Title should be between 1 and 50 characters', 'error');
@@ -41,7 +45,7 @@ export class EventCreateComponent implements OnInit {
       Swal.fire('Error', 'Description should not exceed 250 characters', 'error');
       return;
     }
-    if (new Date(this.event.date) <= new Date(this.minDate)) {
+    if (!this.isDateValid) {
       Swal.fire('Error', 'Date should be in the future', 'error');
       return;
     }
