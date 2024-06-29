@@ -25,17 +25,18 @@ export class EventListComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventService.getEvents().subscribe(events => {
-      this.events = events;
-      this.filteredEvents = events;
-      this.locations = Array.from(new Set(events.map(event => event.location)));
+      const today = new Date().setHours(0, 0, 0, 0); // Set the time to 00:00:00 for comparison
+      this.events = events.filter(event => new Date(event.date).setHours(0, 0, 0, 0) >= today);
+      this.filteredEvents = this.events;
+      this.locations = Array.from(new Set(this.events.map(event => event.location)));
     });
   }
 
   applyFilters(): void {
     this.filteredEvents = this.events.filter(event => {
-      const eventDate = new Date(event.date);
-      const startDate = this.filters.startDate ? new Date(this.filters.startDate) : null;
-      const endDate = this.filters.endDate ? new Date(this.filters.endDate) : null;
+      const eventDate = new Date(event.date).setHours(0, 0, 0, 0);
+      const startDate = this.filters.startDate ? new Date(this.filters.startDate).setHours(0, 0, 0, 0) : null;
+      const endDate = this.filters.endDate ? new Date(this.filters.endDate).setHours(0, 0, 0, 0) : null;
 
       return (!this.filters.name || event.title.toLowerCase().includes(this.filters.name.toLowerCase())) &&
              (!startDate || eventDate >= startDate) &&

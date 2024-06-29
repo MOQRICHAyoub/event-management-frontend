@@ -8,6 +8,7 @@ import { EventDetailsComponent } from './event-details/event-details.component';
 import { EventCreateComponent } from './event-create/event-create.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { PastEventsComponent } from './past-events/past-events.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     EventListComponent,
     EventDetailsComponent,
-    EventCreateComponent
+    EventCreateComponent,
+    PastEventsComponent
   ],
   imports: [
     BrowserModule,

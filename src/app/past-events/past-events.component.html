@@ -1,0 +1,57 @@
+<!-- past-events.component.html -->
+<div class="event-list-container">
+    <div class="filters-container">
+      <form (ngSubmit)="applyFilters()" class="filter-form">
+        <div class="form-group">
+          <label for="filterName">Name</label>
+          <input type="text" id="filterName" [(ngModel)]="filters.name" name="filterName" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="filterStartDate">Start Date</label>
+          <input type="date" id="filterStartDate" [(ngModel)]="filters.startDate" name="filterStartDate" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="filterEndDate">End Date</label>
+          <input type="date" id="filterEndDate" [(ngModel)]="filters.endDate" name="filterEndDate" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="filterLocation">Location</label>
+          <input type="text" id="filterLocation" [(ngModel)]="filters.locationSearch" name="filterLocationSearch" class="form-control" placeholder="Search locations">
+          <div>
+            <button type="button" class="btn btn-link" (click)="selectAllLocations()">Select All</button>
+            <button type="button" class="btn btn-link" (click)="deselectAllLocations()">Deselect All</button>
+          </div>
+          <div *ngFor="let location of filterLocations()">
+            <input type="checkbox" [id]="location" [checked]="filters.selectedLocations.has(location)" (change)="toggleLocation(location)">
+            <label [for]="location">{{ location }}</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+        <button type="button" class="btn btn-secondary" (click)="resetFilters()">Reset</button>
+      </form>
+    </div>
+  
+    <div class="events-container">
+      <div class="button-container">
+        <a routerLink="/events" class="btn btn-secondary">
+          <i class="fas fa-calendar-alt"></i> Upcoming Events
+        </a>
+        <a routerLink="/create-event" class="btn btn-primary">
+          <i class="fas fa-calendar-plus"></i> New Event
+        </a>
+      </div>
+      <h1 class="title">Past Events</h1>
+      <div class="events">
+        <div *ngFor="let event of filteredEvents" class="event-card">
+          <h2 class="event-title">{{ event.title }}</h2>
+          <p class="event-description">{{ event.description }}</p>
+          <p class="event-date">Date: {{ event.date | date }}</p>
+          <p class="event-location">Location: {{ event.location }}</p>
+          <button (click)="showParticipants(event.id)" class="btn btn-secondary">Participants</button>
+          <button (click)="viewFeedback(event.id)" class="btn btn-primary">Voir les notes</button>
+          <button (click)="evaluateEvent(event.id)" class="btn btn-warning">Evaluer l'événement</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
