@@ -47,9 +47,9 @@
           <p class="event-description">{{ event.description }}</p>
           <p class="event-date">Date: {{ event.date | date }}</p>
           <p class="event-location">Location: {{ event.location }}</p>
-          <button (click)="showParticipants(event.id)" class="btn btn-secondary">Participants</button>
-          <button (click)="viewFeedback(event.id)" class="btn btn-primary">Voir les notes</button>
-          <button (click)="evaluateEvent(event.id)" class="btn btn-warning">Evaluer l'événement</button>
+          <button (click)="showParticipants(event.id)" class="btn btn-secondary">Attendees</button>
+          <button (click)="viewFeedback(event.id)" class="btn btn-primary">See feedbacks</button>
+          <button (click)="evaluateEvent(event.id)" class="btn btn-warning">Evaluate the event</button>
         </div>
       </div>
     </div>

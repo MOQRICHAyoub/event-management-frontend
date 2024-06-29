@@ -47,8 +47,8 @@
         <p class="event-description">{{ event.description }}</p>
         <p class="event-date">Date: {{ event.date | date }}</p>
         <p class="event-location">Location: {{ event.location }}</p>
-        <button (click)="showParticipants(event.id)" class="btn btn-secondary">Participants</button>
-        <button (click)="registerForEvent(event.id)" class="btn btn-primary">S'inscrire</button>
+        <button (click)="showParticipants(event.id)" class="btn btn-secondary">Attendees</button>
+        <button (click)="registerForEvent(event.id)" class="btn btn-primary">Register</button>
       </div>
     </div>
   </div>
