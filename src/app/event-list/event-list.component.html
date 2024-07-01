@@ -17,7 +17,7 @@
       <div class="form-group">
         <label for="filterLocation">Location</label>
         <input type="text" id="filterLocation" [(ngModel)]="filters.locationSearch" name="filterLocationSearch" class="form-control" placeholder="Search locations">
-        <div>
+        <div class="selections">
           <button type="button" class="btn btn-link" (click)="selectAllLocations()">Select All</button>
           <button type="button" class="btn btn-link" (click)="deselectAllLocations()">Deselect All</button>
         </div>

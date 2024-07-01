@@ -134,14 +134,14 @@
   }
 
   .reset {
-    background-color: #E4B720;
-    border-color: #E4B720;
+    background-color: #636260;
+    border-color: #636260;
     color: #FFFFFF;
   }
   
   .filter {
-    background-color: #000;
-    border-color: #000;
+    background-color: #007bff;
+    border-color: #007bff;
     color: #FFFFFF;
   }
   
@@ -155,4 +155,14 @@
     background-color: #000;
     border-color: #000;
     color: #FFFFFF;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .selections {
+    display: flex;
+    gap: 10px;
   }
