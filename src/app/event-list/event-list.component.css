@@ -19,11 +19,18 @@
   padding: 20px;
 }
 
-.button-container {
+.top-button-container {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
+  gap: 10px;
+}
+
+.sub-button-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .title {
@@ -110,6 +117,31 @@
   border-color: #007bff;
 }
 
+.btn-secondary {
+  background-color: #378B48;
+  border-color: #378B48;
+}
+
+.past {
+  background-color: #000;
+  border-color: #000;
+  color: #FFFFFF;
+}
+
+.reset {
+  background-color: #E4B720;
+  border-color: #E4B720;
+  color: #FFFFFF;
+}
+
+.filter {
+  background-color: #000;
+  border-color: #000;
+  color: #FFFFFF;
+}
+
 .btn-primary .fas {
   margin-right: 5px;
 }
+
+

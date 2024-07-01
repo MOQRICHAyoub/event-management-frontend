@@ -26,14 +26,15 @@
             <label [for]="location">{{ location }}</label>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Apply Filters</button>
-        <button type="button" class="btn btn-secondary" (click)="resetFilters()">Reset</button>
+        <button type="submit" class="btn filter">Apply Filters</button>
+        <br>
+        <button type="button" class="btn reset" (click)="resetFilters()">Reset</button>
       </form>
     </div>
   
     <div class="events-container">
-      <div class="button-container">
-        <a routerLink="/events" class="btn btn-secondary">
+      <div class="top-button-container">
+        <a routerLink="/events" class="btn upcoming">
           <i class="fas fa-calendar-alt"></i> Upcoming Events
         </a>
         <a routerLink="/create-event" class="btn btn-primary">
@@ -47,9 +48,11 @@
           <p class="event-description">{{ event.description }}</p>
           <p class="event-date">Date: {{ event.date | date }}</p>
           <p class="event-location">Location: {{ event.location }}</p>
-          <button (click)="showParticipants(event.id)" class="btn btn-secondary">Attendees</button>
-          <button (click)="viewFeedback(event.id)" class="btn btn-primary">See feedbacks</button>
-          <button (click)="evaluateEvent(event.id)" class="btn btn-warning">Evaluate the event</button>
+          <div class="sub-button-container">
+            <button (click)="showParticipants(event.id)" class="btn btn-secondary">Attendees</button>
+            <button (click)="viewFeedback(event.id)" class="btn btn-primary">See feedbacks</button>
+            <button (click)="evaluateEvent(event.id)" class="btn evaluation">Evaluate the event</button>
+          </div>
         </div>
       </div>
     </div>

@@ -87,8 +87,8 @@ export class PastEventsComponent implements OnInit {
       this.registrationService.getParticipants(eventId).subscribe(participants => {
         const participantList = participants.map(p => p.username).join('<br>');
         Swal.fire({
-          title: 'Participants',
-          html: participantList || 'No participants yet',
+          title: 'Attendees',
+          html: participantList || 'No one participated',
           icon: 'info',
           confirmButtonText: 'OK'
         });
@@ -125,7 +125,7 @@ export class PastEventsComponent implements OnInit {
           }
 
           Swal.fire({
-            title: 'Evaluer l\'événement',
+            title: 'Eavaluate the event',
             input: 'select',
             inputOptions: availableParticipants.reduce((acc, name) => {
               acc[name] = name;

@@ -26,14 +26,15 @@
           <label [for]="location">{{ location }}</label>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Apply Filters</button>
-      <button type="button" class="btn btn-secondary" (click)="resetFilters()">Reset</button>
+      <button type="submit" class="btn filter">Apply Filters</button>
+      <br>
+      <button type="button" class="btn reset" (click)="resetFilters()">Reset</button>
     </form>
   </div>
 
   <div class="events-container">
-    <div class="button-container">
-      <a routerLink="/pastevents" class="btn btn-secondary">
+    <div class="top-button-container">
+      <a routerLink="/pastevents" class="btn past">
         <i class="fas fa-history"></i> Past Events
       </a>
       <a routerLink="/create-event" class="btn btn-primary">
@@ -47,8 +48,10 @@
         <p class="event-description">{{ event.description }}</p>
         <p class="event-date">Date: {{ event.date | date }}</p>
         <p class="event-location">Location: {{ event.location }}</p>
-        <button (click)="showParticipants(event.id)" class="btn btn-secondary">Attendees</button>
-        <button (click)="registerForEvent(event.id)" class="btn btn-primary">Register</button>
+        <div class="sub-button-container">
+          <button (click)="showParticipants(event.id)" class="btn btn-secondary">Attendees</button>
+          <button (click)="registerForEvent(event.id)" class="btn btn-primary">Register</button>
+        </div>
       </div>
     </div>
   </div>

@@ -86,7 +86,7 @@ export class EventListComponent implements OnInit {
       this.registrationService.getParticipants(eventId).subscribe(participants => {
         const participantList = participants.map(p => p.username).join('<br>');
         Swal.fire({
-          title: 'Participants',
+          title: 'Attendees',
           html: participantList || 'No participants yet',
           icon: 'info',
           confirmButtonText: 'OK'
@@ -98,24 +98,24 @@ export class EventListComponent implements OnInit {
   registerForEvent(eventId: number | undefined): void {
     if (eventId !== undefined) {
       Swal.fire({
-        title: 'S\'inscrire',
+        title: 'Register',
         input: 'text',
-        inputLabel: 'Votre nom',
-        inputPlaceholder: 'Entrez votre nom',
+        inputLabel: 'Your name',
+        inputPlaceholder: 'Enter your name',
         showCancelButton: true,
         confirmButtonText: 'OK',
-        cancelButtonText: 'Annuler'
+        cancelButtonText: 'Cancel'
       }).then(result => {
         if (result.isConfirmed && result.value) {
           const userName = result.value;
           this.registrationService.isUserRegistered(eventId, userName).subscribe(isRegistered => {
             if (isRegistered) {
-              Swal.fire('Erreur', 'Un participant avec ce nom est déjà inscrit.', 'error').then(() => {
+              Swal.fire('Error', 'A participant with this name is already registered.', 'error').then(() => {
                 this.registerForEvent(eventId);
               });
             } else {
               this.registrationService.register(userName, eventId).subscribe(() => {
-                Swal.fire('Succès', 'Vous êtes inscrit à l\'événement', 'success');
+                Swal.fire('Success', 'You are registered for the event !', 'success');
               });
             }
           });
