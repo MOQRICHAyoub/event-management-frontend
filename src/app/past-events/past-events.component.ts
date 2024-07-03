@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../event.service';
+import { EventService } from '../services/event.service';
 import { Event } from '../event';
-import { RegistrationService } from '../registration.service';
-import { FeedbackService } from '../feedback.service';
+import { RegistrationService } from '../services/registration.service';
+import { FeedbackService } from '../services/feedback.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -166,12 +166,14 @@ export class PastEventsComponent implements OnInit {
               }).then(feedbackResult => {
                 if (feedbackResult.isConfirmed && feedbackResult.value) {
                   const { rating, comments } = feedbackResult.value;
-                  if (rating >= 1 && rating <= 5 && comments) {
+                  if (!comments) {
+                    Swal.fire('Error', 'Please leave a comment', 'error');
+                  } else if (rating < 1 || rating > 5){
+                    Swal.fire('Error', 'Please enter a  rating between 1 and 5', 'error');
+                  } else {
                     this.feedbackService.addFeedback({ eventid: eventId, username: userName, rating, comments }).subscribe(() => {
                       Swal.fire('Success', 'Your feedback has been submitted', 'success');
                     });
-                  } else {
-                    Swal.fire('Error', 'Please enter a valid rating (between 1 and 5) and comments', 'error');
                   }
                 }
               });

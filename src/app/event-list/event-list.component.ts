@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../event.service';
+import { EventService } from '../services/event.service';
 import { Event } from '../event';
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../services/registration.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -28,14 +28,13 @@ export class EventListComponent implements OnInit {
       const today = new Date().setHours(0, 0, 0, 0);
       this.events = events.filter(event => new Date(event.date).setHours(0, 0, 0, 0) >= today);
 
-      // Trier les événements par date croissante
       this.events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
       this.filteredEvents = this.events;
       this.locations = Array.from(new Set(this.events.map(event => event.location)));
 
       this.filters.selectedLocations = new Set(this.locations);
-      this.applyFilters(); // Apply initial filters
+      this.applyFilters();
     });
   }
 
@@ -56,7 +55,6 @@ export class EventListComponent implements OnInit {
              this.filters.selectedLocations.has(event.location);
     });
 
-    // Trier les événements par date croissante
     this.filteredEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
