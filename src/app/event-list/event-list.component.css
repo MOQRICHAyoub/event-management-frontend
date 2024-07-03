@@ -40,8 +40,20 @@
   margin-top: 10px;
 }
 
-.title {
-  font-size: 2.5em;
+.title1{
+  font-size: 5em;
+}
+
+.title1 .event {
+  color: blue;
+}
+
+.title1 .sphere {
+  color: green;
+}
+
+.subtitle {
+  font-size: 2em;
   margin-bottom: 20px;
   color: #333;
 }
