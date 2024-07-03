@@ -25,14 +25,26 @@ export class EventListComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventService.getEvents().subscribe(events => {
-      const today = new Date().setHours(0, 0, 0, 0); // Set the time to 00:00:00 for comparison
+      const today = new Date().setHours(0, 0, 0, 0);
       this.events = events.filter(event => new Date(event.date).setHours(0, 0, 0, 0) >= today);
+
+      // Trier les événements par date croissante
+      this.events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
       this.filteredEvents = this.events;
       this.locations = Array.from(new Set(this.events.map(event => event.location)));
+
+      this.filters.selectedLocations = new Set(this.locations);
+      this.applyFilters(); // Apply initial filters
     });
   }
 
   applyFilters(): void {
+    if (this.filters.selectedLocations.size === 0) {
+      this.filteredEvents = [];
+      return;
+    }
+
     this.filteredEvents = this.events.filter(event => {
       const eventDate = new Date(event.date).setHours(0, 0, 0, 0);
       const startDate = this.filters.startDate ? new Date(this.filters.startDate).setHours(0, 0, 0, 0) : null;
@@ -41,8 +53,11 @@ export class EventListComponent implements OnInit {
       return (!this.filters.name || event.title.toLowerCase().includes(this.filters.name.toLowerCase())) &&
              (!startDate || eventDate >= startDate) &&
              (!endDate || eventDate <= endDate) &&
-             (this.filters.selectedLocations.size === 0 || this.filters.selectedLocations.has(event.location));
+             this.filters.selectedLocations.has(event.location);
     });
+
+    // Trier les événements par date croissante
+    this.filteredEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
   resetFilters(): void {
@@ -51,9 +66,9 @@ export class EventListComponent implements OnInit {
       startDate: '',
       endDate: '',
       locationSearch: '',
-      selectedLocations: new Set<string>()
+      selectedLocations: new Set(this.locations)
     };
-    this.filteredEvents = this.events;
+    this.applyFilters();
   }
 
   toggleLocation(location: string): void {

@@ -43,6 +43,9 @@
     </div>
     <h1 class="title">Upcoming Events</h1>
     <div class="events">
+      <div *ngIf="filteredEvents.length === 0" class="no-result">
+        No result
+      </div>
       <div *ngFor="let event of filteredEvents" class="event-card">
         <h2 class="event-title">{{ event.title }}</h2>
         <p class="event-description">{{ event.description }}</p>

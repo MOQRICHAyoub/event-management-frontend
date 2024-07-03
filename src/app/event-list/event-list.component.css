@@ -4,6 +4,13 @@
   margin: 20px;
 }
 
+.no-result {
+  font-size: 1.5em;
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
 .filters-container {
   width: 25%;
   padding: 20px;
@@ -123,8 +130,8 @@
 }
 
 .past {
-  background-color: #000;
-  border-color: #000;
+  background-color: #636260;
+  border-color: #636260;
   color: #FFFFFF;
 }
 
